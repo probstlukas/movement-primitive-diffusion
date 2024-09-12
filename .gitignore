@@ -23,3 +23,6 @@ data/
 
 # stored model checkpoints
 model_checkpoints/
+
+# dependencies
+dependencies/
