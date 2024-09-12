@@ -12,14 +12,14 @@ __pycache__
 .vscode
 
 # hydra logs
-outputs
-multirun
+outputs/
+multirun/
 
 # wandb logs
-wandb
+wandb/
 
 # data folder
-data
+data/
 
 # stored model checkpoints
-model_checkpoints
+model_checkpoints/
