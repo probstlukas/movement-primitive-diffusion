@@ -10,3 +10,4 @@ defaults:
 
 wandb:
   group: mpd-transformer
+  

@@ -41,7 +41,7 @@ ignore_in_name:
   - real_rope_threading
 
 wandb:
-  entity: trajdiff
+  entity: ucioq
   project: ???
   group: ???
   mode: online # online, offline, disabled

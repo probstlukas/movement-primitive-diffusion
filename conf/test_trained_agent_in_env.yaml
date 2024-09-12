@@ -1,8 +1,8 @@
-config: ???
-weights: ???
+# config: ???
+# weights: ???
 # For example:
-# config: wandb/latest-run/files/config.yaml
-# weights: wandb/latest-run/files/best_model.pth
+config: wandb/latest-run/files/config.yaml
+weights: wandb/latest-run/files/model_last_epoch.pth
 
 num_trajectories: 20
 

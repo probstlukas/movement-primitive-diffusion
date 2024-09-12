@@ -17,7 +17,8 @@ from movement_primitive_diffusion.workspaces.base_vector_workspace import BaseVe
 log = logging.getLogger(__name__)
 OmegaConf.register_new_resolver("eval", eval)
 
-
+# Gets overwritten by command line arguments
+# python scripts/train.py --config-name dummy +experiments/obstacle_avoidance=train_prodmp_transformer
 CONFIG = "experiments/bimanual_tissue_manipulation/train_prodmp_transformer.yaml"
 
 
@@ -131,10 +132,12 @@ def main(cfg: DictConfig) -> float:
 
             # Test agent in workspace
             if current_epoch % cfg.eval_in_env_after_epochs == 0:
-                test_results = workspace.test_agent(agent, cfg.num_trajectories_in_env)
-                wandb.log(test_results)
-                pbar_epochs.set_description(f"Epoch {epoch_string}/{cfg.epochs}")
-                pbar_epochs.set_postfix(**test_results)
+                # test_results = workspace.test_agent(agent, cfg.num_trajectories_in_env)
+                # wandb.log(test_results)
+                # pbar_epochs.set_description(f"Epoch {epoch_string}/{cfg.epochs}")
+                # pbar_epochs.set_postfix(**test_results)
+                pass
+                test_results = {}
             else:
                 test_results = {}
 

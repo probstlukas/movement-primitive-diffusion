@@ -41,7 +41,7 @@ ignore_in_name:
   - real_ligating_loop
 
 wandb:
-  entity: trajdiff
+  entity: ucioq
   project: ???
   group: ???
   mode: online # online, offline, disabled

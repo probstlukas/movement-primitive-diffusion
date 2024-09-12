@@ -9,4 +9,6 @@ defaults:
   - _self_
 
 wandb:
-  group: mpd-transformer
+  group: ucioq-karlsruhe-institute-of-technology
+  entity: ucioq-karlsruhe-institute-of-technology
+  project: asdsad

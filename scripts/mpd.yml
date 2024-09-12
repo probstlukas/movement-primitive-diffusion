@@ -1,0 +1,441 @@
+{
+    "dataset_config":
+        {
+            "_target_": "movement_primitive_diffusion.datasets.trajectory_dataset.SubsequenceTrajectoryDataset",
+            "_recursive_": False,
+            "subsequence_length": 14,
+            "trajectory_dirs":
+                [
+                    "/home/studentgroup4/aloha/movement-primitive-diffusion/data/aloha_hand_over/trajectory_01",
+                    "/home/studentgroup4/aloha/movement-primitive-diffusion/data/aloha_hand_over/trajectory_02",
+                    "/home/studentgroup4/aloha/movement-primitive-diffusion/data/aloha_hand_over/trajectory_03",
+                    "/home/studentgroup4/aloha/movement-primitive-diffusion/data/aloha_hand_over/trajectory_04",
+                ],
+            "keys": ["action", "agent_pos", "agent_vel", "box"],
+            "dt": 0.03333333333333333,
+            "target_dt": None,
+            "normalize_keys": ["action", "agent_pos"],
+            "normalize_symmetrically": True,
+            "standardize_keys": [],
+            "scaler_values":
+                {
+                    "action":
+                        {
+                            "min":
+                                [
+                                    0,
+                                    -3.1415,
+                                    -1.5707,
+                                    -1.5707,
+                                    -3.1415,
+                                    -1.5707,
+                                    -3.1415,
+                                    0,
+                                ],
+                            "max":
+                                [
+                                    99999,
+                                    3.1415,
+                                    1.5707,
+                                    1.5707,
+                                    3.1415,
+                                    1.5707,
+                                    3.1415,
+                                    25,
+                                ],
+                        },
+                    "agent_pos":
+                        {
+                            "min":
+                                [
+                                    0,
+                                    -3.1415,
+                                    -1.5707,
+                                    -1.5707,
+                                    -3.1415,
+                                    -1.5707,
+                                    -3.1415,
+                                    -10,
+                                    -10,
+                                ],
+                            "max":
+                                [
+                                    99999,
+                                    3.1415,
+                                    1.5707,
+                                    1.5707,
+                                    3.1415,
+                                    1.5707,
+                                    3.1415,
+                                    10,
+                                    10,
+                                ],
+                        },
+                },
+            "image_keys": [],
+            "image_sizes": [],
+            "crop_sizes": [],
+            "calculate_velocities_from_to":
+                [["agent_pos", "agent_vel"], ["action", "action_vel"]],
+            "recalculate_velocities_from_to":
+                [["agent_pos", "agent_vel"], ["action", "action_vel"]],
+        },
+    "workspace_config":
+        {
+            "_target_": "movement_primitive_diffusion.workspaces.obstacle_avoidance.obstacle_avoidance_vector_workspace.ObstacleAvoidanceEnvVectorWorkspace",
+            "_recursive_": False,
+            "t_act": 12,
+            "num_parallel_envs": 12,
+            "shared_memory": False,
+            "async_vector_env": True,
+            "show_images": False,
+            "video_dt": 0.03333333333333333,
+            "num_upload_successful_videos": 5,
+            "num_upload_failed_videos": 5,
+            "seed": 42,
+            "env_config":
+                {
+                    "_target_": "movement_primitive_diffusion.workspaces.obstacle_avoidance.obstacle_avoidance_env.ObstacleAvoidanceEnv",
+                    "_recursive_": False,
+                    "scaler_config":
+                        {
+                            "normalize_keys": ["action", "agent_pos"],
+                            "normalize_symmetrically": True,
+                            "standardize_keys": [],
+                            "scaler_values":
+                                {
+                                    "action":
+                                        {
+                                            "min":
+                                                [
+                                                    0.0,
+                                                    -3.1414999961853027,
+                                                    -1.5707000494003296,
+                                                    -1.5707000494003296,
+                                                    -3.1414999961853027,
+                                                    -1.5707000494003296,
+                                                    -3.1414999961853027,
+                                                    0.0,
+                                                ],
+                                            "max":
+                                                [
+                                                    99999.0,
+                                                    3.1414999961853027,
+                                                    1.5707000494003296,
+                                                    1.5707000494003296,
+                                                    3.1414999961853027,
+                                                    1.5707000494003296,
+                                                    3.1414999961853027,
+                                                    25.0,
+                                                ],
+                                        },
+                                    "agent_pos":
+                                        {
+                                            "min":
+                                                [
+                                                    0.0,
+                                                    -3.1414999961853027,
+                                                    -1.5707000494003296,
+                                                    -1.5707000494003296,
+                                                    -3.1414999961853027,
+                                                    -1.5707000494003296,
+                                                    -3.1414999961853027,
+                                                    -10.0,
+                                                    -10.0,
+                                                ],
+                                            "max":
+                                                [
+                                                    99999.0,
+                                                    3.1414999961853027,
+                                                    1.5707000494003296,
+                                                    1.5707000494003296,
+                                                    3.1414999961853027,
+                                                    1.5707000494003296,
+                                                    3.1414999961853027,
+                                                    10.0,
+                                                    10.0,
+                                                ],
+                                        },
+                                },
+                        },
+                    "observation_type": "state",
+                    "t_obs": 3,
+                    "sim_dt": 0.001,
+                    "control_dt": 0.03333333333333333,
+                    "time_limit": 150,
+                    "workspace_limits_low": [0.293, -0.3, 0.11],
+                    "workspace_limits_high": [0.707, 0.38, 0.13],
+                    "render_mode": "rgb_array",
+                    "render_size": [480, 480],
+                    "camera_config":
+                        {
+                            "distance": 1.1,
+                            "yaw": 90,
+                            "pitch": -45,
+                            "lookat": [0.35, 0.04, 0.12],
+                        },
+                    "max_ik_iterations": 1000,
+                    "use_null_space_ik": False,
+                },
+        },
+    "performance_metric": "successful_mode_entropy",
+    "performance_direction": "max",
+    "device": "cuda",
+    "t_obs": 3,
+    "t_pred": 12,
+    "t_act": 12,
+    "predict_past": False,
+    "train_split": 0.9,
+    "dataset_fully_on_gpu": True,
+    "trajectory_dir": "aloha_hand_over",
+    "data_loader_config":
+        {
+            "shuffle": True,
+            "pin_memory": False,
+            "num_workers": 0,
+            "batch_size": 256,
+        },
+    "epochs": 3000,
+    "early_stopping": False,
+    "early_stopping_warmup_epochs": 300,
+    "early_stopping_patience": 5,
+    "eval_in_env_after_epochs": 100,
+    "num_trajectories_in_env": 24,
+    "save_distance": None,
+    "group_from_overrides": False,
+    "name_from_overrides": True,
+    "ignore_in_name": ["group", "obstacle_avoidance"],
+    "wandb":
+        {
+            "entity": "ucioq-karlsruhe-institute-of-technology",
+            "project": "hand_over_test_01",
+            "group": "ucioq-karlsruhe-institute-of-technology",
+            "mode": "online",
+        },
+    "agent_config":
+        {
+            "sigma_distribution_config":
+                {
+                    "_target_": "movement_primitive_diffusion.distributions.RandLogLogistic",
+                    "_recursive_": False,
+                    "loc": 0.5,
+                    "scale": 0.5,
+                    "min_value": 0.05,
+                    "max_value": 10.0,
+                },
+            "model_config":
+                {
+                    "inner_model_config":
+                        {
+                            "prodmp_handler_config":
+                                {
+                                    "_target_": "movement_primitive_diffusion.utils.mp_utils.ProDMPHandler",
+                                    "_recursive_": False,
+                                    "num_dof": None,
+                                    "dt": 0.03333333333333333,
+                                    "precompute_dt": 0.01,
+                                    "traj_steps": 12,
+                                    "weights_scale": 1.0,
+                                    "goal_scale": 1.0,
+                                    "num_basis": 12,
+                                    "tau_factor": 1.0,
+                                    "basis_bandwidth_factor": 9.0,
+                                    "alpha": 10.0,
+                                    "alpha_phase": 1.0,
+                                    "num_basis_outside": 0,
+                                    "mp_type": "prodmp",
+                                    "learn_tau": False,
+                                    "learn_delay": False,
+                                    "relative_goal": True,
+                                    "auto_scale_basis": False,
+                                    "disable_goal": False,
+                                    "device": "cuda",
+                                    "traj_type": "POSITION",
+                                },
+                            "_target_": "movement_primitive_diffusion.models.prodmp_causal_transformer_inner_model.ProDMPCausalTransformerInnerModel",
+                            "_recursive_": False,
+                            "state_size": None,
+                            "action_size": None,
+                            "t_pred": 12,
+                            "t_obs": 3,
+                            "n_layers": 6,
+                            "n_heads": 4,
+                            "embedding_size": 256,
+                            "n_cond_layers": 0,
+                            "dropout_probability_embedding": 0.0,
+                            "dropout_probability_attention": 0.3,
+                            "sigma_embedding_config":
+                                {
+                                    "_target_": "movement_primitive_diffusion.networks.sigma_embeddings.SinusoidalEmbedding",
+                                    "_recursive_": False,
+                                    "embedding_size": 256,
+                                    "hidden_size_factor": 4,
+                                },
+                        },
+                    "scaling_config":
+                        {
+                            "_target_": "movement_primitive_diffusion.models.scaling.TrajectoryKarrasScaling",
+                            "_recursive_": False,
+                            "sigma_data": 0.5,
+                        },
+                    "_target_": "movement_primitive_diffusion.models.diffusion_model.DiffusionModel",
+                    "_recursive_": False,
+                },
+            "sampler_config":
+                {
+                    "_target_": "movement_primitive_diffusion.samplers.euler.EulerSampler",
+                    "_recursive_": False,
+                },
+            "noise_scheduler_config":
+                {
+                    "_target_": "movement_primitive_diffusion.noise_schedulers.ExponentialNoiseScheduler",
+                    "_recursive_": False,
+                    "sigma_min": 0.05,
+                    "sigma_max": 10.0,
+                },
+            "_target_": "movement_primitive_diffusion.agents.diffusion_agent.ProDMPDiffusionAgent",
+            "_recursive_": False,
+            "device": "cuda",
+            "t_obs": 3,
+            "predict_past": False,
+            "diffusion_steps": 35,
+            "sigma_min": 0.05,
+            "sigma_max": 10.0,
+            "use_ema": True,
+            "ema_config":
+                {
+                    "decay": 0.999,
+                    "min_decay": 0.0,
+                    "update_after_step": 0,
+                    "use_ema_warmup": True,
+                    "inv_gamma": 1.0,
+                    "power": 0.75,
+                },
+            "optimizer_config":
+                {
+                    "_target_": "torch.optim.AdamW",
+                    "lr": 0.0001,
+                    "betas": [0.95, 0.999],
+                    "eps": 1e-08,
+                    "weight_decay": 1e-06,
+                },
+            "lr_scheduler_config":
+                {
+                    "_target_": "movement_primitive_diffusion.utils.lr_scheduler.get_scheduler",
+                    "name": "cosine",
+                    "num_warmup_steps": 500,
+                    "num_training_steps": 3000,
+                    "last_epoch": -1,
+                },
+            "special_optimizer_function": True,
+            "special_optimizer_config":
+                {
+                    "model_weight_decay": 0.001,
+                    "encoder_weight_decay": 1e-06,
+                    "learning_rate": 0.0001,
+                    "betas": [0.95, 0.999],
+                    "eps": 1e-08,
+                },
+            "process_batch_config":
+                {
+                    "_target_": "movement_primitive_diffusion.datasets.process_batch.ProcessBatchProDMP",
+                    "_recursive_": False,
+                    "t_obs": 3,
+                    "t_pred": 12,
+                    "relative_action_values": False,
+                    "predict_past": False,
+                    "action_keys": [{ "key": "action", "feature_size": [8] }],
+                    "observation_keys": ["agent_pos", "box"],
+                    "initial_values_come_from_action_data": True,
+                    "initial_position_keys": ["action"],
+                    "initial_velocity_keys": ["action_vel"],
+                },
+            "encoder_config":
+                {
+                    "_target_": "movement_primitive_diffusion.encoder.Encoder",
+                    "_recursive_": False,
+                    "t_obs": 3,
+                    "network_configs":
+                        [
+                            {
+                                "observation_key": "agent_pos",
+                                "feature_size": [9],
+                                "network_config":
+                                    {
+                                        "_target_": "movement_primitive_diffusion.networks.layers.PassThrough",
+                                    },
+                            },
+                            {
+                                "observation_key": "box",
+                                "feature_size": [8],
+                                "network_config":
+                                    {
+                                        "_target_": "movement_primitive_diffusion.networks.layers.PassThrough",
+                                    },
+                            },
+                        ],
+                    "aggregator_config":
+                        {
+                            "_target_": "movement_primitive_diffusion.aggregators.concatenate.ConcatenateAggregator",
+                        },
+                },
+        },
+    "_wandb":
+        {
+            "python_version": "3.10.14",
+            "cli_version": "0.17.5",
+            "framework": "torch",
+            "is_jupyter_run": False,
+            "is_kaggle_kernel": False,
+            "start_time": 1723646055,
+            "t":
+                {
+                    1: [1, 41, 49, 50, 55, 71, 83],
+                    2: [1, 41, 49, 50, 55, 71, 83],
+                    3: [2, 7, 13, 16, 23],
+                    4: "3.10.14",
+                    5: "0.17.5",
+                    8: [5],
+                    13: "linux-x86_64",
+                },
+            "m":
+                [
+                    { 1: "epoch", 6: [3] },
+                    { 1: "lr", 5: 1, 6: [1, 3] },
+                    { 1: "loss", 5: 1, 6: [1, 3] },
+                    { 1: "val_loss", 5: 1, 6: [1, 3] },
+                    { 1: "start_point_deviation", 5: 1, 6: [1, 3] },
+                    { 1: "end_point_deviation", 5: 1, 6: [1, 3] },
+                    { 1: "best_epoch", 5: 1, 6: [1, 3] },
+                    { 1: "best_successful_mode_entropy", 5: 1, 6: [1, 3] },
+                    { 1: "success_rate", 5: 1, 6: [1, 3] },
+                    { 1: "mean_episode_length", 5: 1, 6: [1, 3] },
+                    { 1: "truncation_rate", 5: 1, 6: [1, 3] },
+                    { 1: "mean_return", 5: 1, 6: [1, 3] },
+                    { 1: "min_return", 5: 1, 6: [1, 3] },
+                    { 1: "max_return", 5: 1, 6: [1, 3] },
+                    { 1: "mean_max_reward", 5: 1, 6: [1, 3] },
+                    { 1: "mean_final_reward", 5: 1, 6: [1, 3] },
+                    { 1: "mean_final_goal_distance", 5: 1, 6: [1, 3] },
+                    { 1: "modes_dec", 5: 1, 6: [1, 3] },
+                    { 1: "mode_entropy", 5: 1, 6: [1, 3] },
+                    { 1: "successful_modes_dec", 5: 1, 6: [1, 3] },
+                    { 1: "successful_mode_entropy", 5: 1, 6: [1, 3] },
+                    { 1: "failed_trajectories", 5: 1, 6: [1, 3] },
+                    { 1: "successful_trajectories", 5: 1, 6: [1, 3] },
+                    { 1: "trajectory_modes", 5: 1, 6: [1, 3] },
+                    { 1: "mean_tool_path_length", 5: 1, 6: [1, 3] },
+                    { 1: "min_tool_path_length", 5: 1, 6: [1, 3] },
+                    { 1: "max_tool_path_length", 5: 1, 6: [1, 3] },
+                    { 1: "mean_tool_acceleration", 5: 1, 6: [1, 3] },
+                    { 1: "min_tool_acceleration", 5: 1, 6: [1, 3] },
+                    { 1: "max_tool_acceleration", 5: 1, 6: [1, 3] },
+                    { 1: "mean_tool_energy", 5: 1, 6: [1, 3] },
+                    { 1: "min_tool_energy", 5: 1, 6: [1, 3] },
+                    { 1: "max_tool_energy", 5: 1, 6: [1, 3] },
+                    { 1: "mean_tool_jerk", 5: 1, 6: [1, 3] },
+                    { 1: "min_tool_jerk", 5: 1, 6: [1, 3] },
+                    { 1: "max_tool_jerk", 5: 1, 6: [1, 3] },
+                ],
+        },
+}

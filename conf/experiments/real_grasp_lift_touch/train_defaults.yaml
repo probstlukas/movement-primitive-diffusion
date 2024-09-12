@@ -41,7 +41,7 @@ ignore_in_name:
   - real_grasp_lift_touch
 
 wandb:
-  entity: trajdiff
+  entity: ucioq
   project: ???
   group: ???
   mode: online # online, offline, disabled
