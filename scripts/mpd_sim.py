@@ -75,23 +75,23 @@ def main(cfg: DictConfig) -> float:
     print("scaler_values")
     print(scaler_values)
 
-    # for key in normalize_keys:
-    #     assert key in scaler_values, f"Key {key} not found in scaler values."
-    #     for metric in ["min", "max"]:
-    #         assert (
-    #             metric in scaler_values[key]
-    #             and scaler_values[key][metric] is not None
-    #         ), f"Key {key} does not have {metric} in scaler values."
-    #         scaler_values[key][metric] = np.array(scaler_values[key][metric], dtype=np.float32)
+    for key in normalize_keys:
+        assert key in scaler_values, f"Key {key} not found in scaler values."
+        for metric in ["min", "max"]:
+            assert (
+                metric in scaler_values[key]
+                and scaler_values[key][metric] is not None
+            ), f"Key {key} does not have {metric} in scaler values."
+            scaler_values[key][metric] = np.array(scaler_values[key][metric], dtype=np.float32)
 
 
-    # def denormalize_destandardize_actions( action: torch.tensor) -> torch.tensor:
-    #     action_copy = deepcopy(action)
-    #     if (key := "action") in normalize_keys:
-    #         action_copy = denormalize(action_copy, scaler_values[key], symmetric=normalize_symmetrically)
-    #         print("denomalize!")
-    #     # action_copy = np.clip(action_copy, self.action_space.low, self.action_space.high)
-    #     return action_copy
+    def denormalize_destandardize_actions( action: torch.tensor) -> torch.tensor:
+        action_copy = deepcopy(action)
+        if (key := "action") in normalize_keys:
+            action_copy = denormalize(action_copy, scaler_values[key], symmetric=normalize_symmetrically)
+            print("denomalize!")
+        action_copy = np.clip(action_copy, scaler_values['action']['min'], scaler_values['action']['max'])
+        return action_copy
     
     ProcessBatch_ = ProcessBatchProDMP(scaler_config["agent_config"]["process_batch_config"]["t_obs"], 
                                  scaler_config["agent_config"]["process_batch_config"]["t_pred"], 
@@ -116,7 +116,7 @@ def main(cfg: DictConfig) -> float:
                     # Predict the next action sequence
                     if(obs is not None):
                         
-                        # obs["agent_pos"] = normalize(obs["agent_pos"].to(device='cpu'), scaler_values["agent_pos"], normalize_symmetrically)
+                        obs["agent_pos"] = normalize(obs["agent_pos"].to(device='cpu'), scaler_values["agent_pos"], normalize_symmetrically)
                         print("Normalized!")
 
                         for key in obs.keys():
@@ -131,7 +131,10 @@ def main(cfg: DictConfig) -> float:
                         for key in obs.keys():
                             obs[key] = obs[key].to(device='cuda')
                         for key in extra.keys():
-                            extra[key] = extra[key][:, :-1].to(device='cpu')
+                            # extra[key] = extra[key][:, :-1].to(device='cpu')
+
+                            # Don't remove last when reduced data
+                            extra[key] = extra[key][:, :].to(device='cpu')
                         
 
                         print("obs")
@@ -142,10 +145,11 @@ def main(cfg: DictConfig) -> float:
                         actions = agent.predict(obs, extra)
                         print("Predicted!")
 
-                        # actions = denormalize_destandardize_actions(actions.to(device='cpu'))
+                        actions = denormalize_destandardize_actions(actions.to(device='cpu'))
+                        print("Denormalized!")
                         actions = actions.to(device='cuda')
 
-                        print("Denormalized actions:")
+                        print("Actions:")
                         print(actions)
 
                         conn.send(actions)

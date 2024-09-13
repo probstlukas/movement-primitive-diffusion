@@ -19,7 +19,7 @@ OmegaConf.register_new_resolver("eval", eval)
 
 # Gets overwritten by command line arguments
 # python scripts/train.py --config-name dummy +experiments/obstacle_avoidance=train_prodmp_transformer
-CONFIG = "experiments/bimanual_tissue_manipulation/train_prodmp_transformer.yaml"
+CONFIG = "experiments/aloha_hand_over/train_prodmp_transformer.yaml"
 
 
 @hydra.main(version_base=None, config_path="../conf", config_name=CONFIG)
