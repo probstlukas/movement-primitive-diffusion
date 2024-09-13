@@ -9,15 +9,14 @@ keys:
   - action
   - agent_pos
   - agent_vel
-  - box
+  # - box
 
 dt: ${eval:"1.0/30.0"}
 
 target_dt: null
-normalize_keys: False
-  # - action
-  # - agent_pos
-  # - box
+normalize_keys: # False
+  - action
+  - agent_pos
 normalize_symmetrically: True # False: normalized to [0, 1] instead of [-1, 1]
 standardize_keys: []
 scaler_values:
@@ -25,12 +24,17 @@ scaler_values:
     # # "waist", "shoulder", "elbow", "forearm_roll", "wrist_angle", "wrist_rotate", "gripper"
     # min: [-3.1415, -1.5707, -1.5707, -3.1415, -1.5707, -3.1415, -12.5]
     # max: [3.1415, 1.5707, 1.5707, 3.1415, 1.5707, 3.1415, 12.5]
+
+    # Reduced dataset
+    min: [-3.1415, -1.5707, -1.5707, -3.1415, -1.5707, -3.1415]
+    max: [3.1415, 1.5707, 1.5707, 3.1415, 1.5707, 3.1415]
   agent_pos:
     # min: [-3.1415, -1.5707, -1.5707, -3.1415, -1.5707, -3.1415, 0.021, 0.021]
     # max: [3.1415, 1.5707, 1.5707, 3.1415, 1.5707, 3.1415, 0.057, 0.057]
-  # box:
-  #   min: [-10, -10, -10, -10, -10, -10, -10]
-  #   max: [10, 10, 10, 10, 10, 10, 10]
+
+    # Reduced dataset
+    min: [-3.1415, -1.5707, -1.5707, -3.1415, -1.5707, -3.1415]
+    max: [3.1415, 1.5707, 1.5707, 3.1415, 1.5707, 3.1415]
 
 image_keys: []
 image_sizes: []
@@ -39,4 +43,6 @@ crop_sizes: []
 calculate_velocities_from_to: # dataset does not have action_velocities -> calculate
   - [agent_pos, agent_vel]
   - [action, action_vel]
-recalculate_velocities_from_to: []
+recalculate_velocities_from_to: 
+  - [agent_pos, agent_vel]
+  - [action, action_vel]

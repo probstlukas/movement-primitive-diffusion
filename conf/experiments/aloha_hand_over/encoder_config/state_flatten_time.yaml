@@ -12,10 +12,10 @@ network_configs:
     network_config:
       _target_: movement_primitive_diffusion.networks.layers.FlattenTime
 
-  - observation_key: box
-    feature_size: null # set in python based on dataset
-    network_config:
-      _target_: movement_primitive_diffusion.networks.layers.FlattenTime
+  # - observation_key: box
+  #   feature_size: null # set in python based on dataset
+  #   network_config:
+  #     _target_: movement_primitive_diffusion.networks.layers.FlattenTime
 
 aggregator_config:
   _target_: movement_primitive_diffusion.aggregators.concatenate.ConcatenateAggregator

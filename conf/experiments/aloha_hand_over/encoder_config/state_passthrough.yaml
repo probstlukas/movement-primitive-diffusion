@@ -12,10 +12,15 @@ network_configs:
     network_config:
       _target_: movement_primitive_diffusion.networks.layers.PassThrough
 
-  - observation_key: box
+  - observation_key: agent_vel
     feature_size: null # set in python based on dataset
     network_config:
       _target_: movement_primitive_diffusion.networks.layers.PassThrough
+
+  # - observation_key: box
+  #   feature_size: null # set in python based on dataset
+  #   network_config:
+  #     _target_: movement_primitive_diffusion.networks.layers.PassThrough
 
 aggregator_config:
   _target_: movement_primitive_diffusion.aggregators.concatenate.ConcatenateAggregator

@@ -4,7 +4,10 @@
 config: wandb/latest-run/files/config.yaml
 weights: wandb/latest-run/files/model_last_epoch.pth
 
-num_trajectories: 20
+# config: wandb/run-20240912_172125-gg3oc9yh/files/config.yaml
+# weights: wandb/run-20240912_172125-gg3oc9yh/files/best_model.pth
+
+num_trajectories: 1
 
 to_change:
   agent_config:

@@ -15,14 +15,14 @@ network_configs:
       num_neurons: 32
       time_steps: ${t_obs}
 
-  - observation_key: box
-    feature_size: null # set in python based on dataset
-    network_config:
-      _target_: movement_primitive_diffusion.networks.mlp.DependentTimeStepsMLP
-      feature_size: null
-      num_layers: 2
-      num_neurons: 32
-      time_steps: ${t_obs}
+  # - observation_key: box
+  #   feature_size: null # set in python based on dataset
+  #   network_config:
+  #     _target_: movement_primitive_diffusion.networks.mlp.DependentTimeStepsMLP
+  #     feature_size: null
+  #     num_layers: 2
+  #     num_neurons: 32
+  #     time_steps: ${t_obs}
 
 aggregator_config:
   _target_: movement_primitive_diffusion.aggregators.concatenate.ConcatenateAggregator

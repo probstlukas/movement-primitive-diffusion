@@ -6,6 +6,10 @@ env_config:
   scaler_config:
     scaler_values: null # set in python based on dataset
 
+
+
+    
+
 # _target_: movement_primitive_diffusion.workspaces.obstacle_avoidance.obstacle_avoidance_vector_workspace.ObstacleAvoidanceEnvVectorWorkspace
 # _recursive_: False
 

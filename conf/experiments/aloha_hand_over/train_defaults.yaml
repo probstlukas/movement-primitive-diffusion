@@ -18,7 +18,7 @@ predict_past: False
 train_split: 0.9
 dataset_fully_on_gpu: True
 
-trajectory_dir: aloha_hand_over
+trajectory_dir: aloha_hand_over_reduced_interpol
 
 data_loader_config:
   shuffle: True
@@ -27,7 +27,7 @@ data_loader_config:
   batch_size: 256
 
  # Note: can be null, so training is only stopped by early_stopping
-epochs: 500 # unet lowdim: 5000, unet video: 1500, unet hybrid: 3000, unet real img: 600
+epochs: 75 # unet lowdim: 5000, unet video: 1500, unet hybrid: 3000, unet real img: 600
 early_stopping: False
 # Note: we early stop based on success rate in env -> early stopping patience
 # translates to eval_in_env_after_epochs * early_stopping_patience epochs.
@@ -41,10 +41,10 @@ group_from_overrides: False
 name_from_overrides: True
 ignore_in_name:
   - group
-  - obstacle_avoidance
+  - aloha_hand_over
 
 wandb:
-  entity: ???
-  project: ???
-  group: ???
-  mode: online # online, offline, disabled
+  group: ucioq-karlsruhe-institute-of-technology
+  entity: ucioq-karlsruhe-institute-of-technology
+  project: hand_over_test_02
+  mode: online
